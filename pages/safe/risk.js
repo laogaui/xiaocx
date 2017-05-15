@@ -23,6 +23,12 @@ Page({
    */
   data: {
     risk: {},
+    updata: {
+    "state": null,
+    "site_risk_id": null,
+    "comment": "", 
+    "commit_time": "", 
+    "device": "" }
   },
 
   /**
@@ -33,6 +39,7 @@ Page({
     let riskId = options.riskId
     app.getRisksDb((risksDb) => {
       let risk = risksDb.risks[riskId]
+      console.log('risk is ')
       console.log(risk)
       this.setData({ risk })
     })
@@ -128,25 +135,72 @@ state: opened forwarded closed
       cancelColor: '#4183c4',
       confirmText: '确认',
       confirmColor: '#4183c4',
-      success: function(res) {
-        console.log('success')
+      success: (res) => {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          this.uploadDataToserver()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       },
       fail: function(res) {
         console.log('fail')
       },
       complete: function(res) {},
     })
-    // wx.request({
-    //   url: 'https://dev.iscv.sunftech.org/upload/site_risk_state',
-    //   data: '',
-    //   header: {
-    //     'Content-type': 'application/json'
-    //   },
-    //   method: '',
-    //   dataType: '',
-    //   success: function(res) {},
-    //   fail: function(res) {},
-    //   complete: function(res) {},
-    // })
+    
+    
+  },
+  uploadDataToserver: function () {
+    wx.showLoading({
+      title: '正在提交数据',
+    })
+    let state = this.data.risk['state'].code
+    let riskid = this.data.risk['id']
+    let comment = this.data.risk['state_comment']
+    var util = require('../../utils/util.js')
+    let committime = util.formatTime(new Date)
+    let device = this.data.risk['device']
+    this.setData({
+      updata: {
+        "state": state,
+        "site_risk_id": riskid,
+        "comment": comment,
+        "commit_time": committime,
+        "device": device
+      }
+    })
+    wx.request({
+      url: 'https://dev.iscv.sunftech.org/upload/site_risk_state',
+      data: this.data.updata,
+      header: {
+        'Content-type': 'application/json'
+      },
+      method: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        wx.hideLoading()
+        if (res.statusCode==200){
+          if (res['data'].status == "success"){
+            console.log("sdhffhd")
+          }
+        }
+        console.log('success  res is')
+        console.log(res)
+        wx.showModal({
+          title: '',
+          content: '',
+        })
+      },
+      fail: function(res) {
+        console.log('fail res is')
+        console.log(res)
+        // wx.showModal({
+        //   title: '',
+        //   content: '',
+        // })
+      },
+      complete: function(res) {},
+    })
   }
 })
