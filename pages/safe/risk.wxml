@@ -23,8 +23,8 @@
         <text class="risk-state {{ risk.state.className }}">{{ risk.state.des }}</text>
       </view>
       <view wx:if="{{ risk.state.code == 'opened' }}" class="btn-group">
-        <button class="risk-btn warning-bg" catchtap="changeState">已敦促</button>
-        <button class="risk-btn success-bg" catchtap="changeState">已整改</button>
+        <button class="risk-btn warning-bg" catchtap="changeState" data-title="已敦促">已敦促</button>
+        <button class="risk-btn success-bg" catchtap="changeState" data-title="已整改">已整改</button>
       </view>
     </view>
   </view>

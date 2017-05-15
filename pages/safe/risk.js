@@ -127,9 +127,17 @@ HTTP POST application/json
 state: opened forwarded closed
    */
   changeState (event) {
+    console.log(event)
+   let clickTitle = event.currentTarget.dataset.title
+   var contentStr=''
+   if (clickTitle=="已敦促"){
+     contentStr = '确认已敦促相关人员来突进安全问题的结局?'
+   }else{
+     contentStr = '确认相关安全问题已整改?'
+   }
     wx.showModal({
       title: '智建的提示信息',
-      content: '确认已敦促相管人员来突进安全问题的结局？',
+      content: contentStr,
       showCancel: true,
       cancelText: '取消',
       cancelColor: '#4183c4',
@@ -138,7 +146,7 @@ state: opened forwarded closed
       success: (res) => {
         if (res.confirm) {
           console.log('用户点击确定')
-          this.uploadDataToserver()
+          this.uploadDataToserver(clickTitle)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -151,11 +159,11 @@ state: opened forwarded closed
     
     
   },
-  uploadDataToserver: function () {
+  uploadDataToserver: function (title) {
     wx.showLoading({
       title: '正在提交数据',
     })
-    let state = this.data.risk['state'].code
+    let state = title
     let riskid = this.data.risk['id']
     let comment = this.data.risk['state_comment']
     var util = require('../../utils/util.js')
@@ -182,23 +190,31 @@ state: opened forwarded closed
         wx.hideLoading()
         if (res.statusCode==200){
           if (res['data'].status == "success"){
-            console.log("sdhffhd")
+            wx.showModal({
+              title: '数据提交成功',
+              content: '',
+              showCancel:false
+            })
+          }else{
+            let err = res['errMsg'] || '数据提交失败'
+            wx.showModal({
+              title: '提示',
+              content: err,
+              showCancel: false
+            })
           }
         }
         console.log('success  res is')
         console.log(res)
-        wx.showModal({
-          title: '',
-          content: '',
-        })
+        
       },
       fail: function(res) {
-        console.log('fail res is')
-        console.log(res)
-        // wx.showModal({
-        //   title: '',
-        //   content: '',
-        // })
+        let err = res['errMsg'] || '数据提交失败'
+        wx.showModal({
+          title: '提示',
+          content: err,
+          showCancel: false
+        })
       },
       complete: function(res) {},
     })
