@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/safe/index",
     "pages/buildings/buildings",
     "pages/safe/risksOfSection",

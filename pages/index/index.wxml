@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container index">
+  <view class="title">首页</view>
+  <view class="list">
+    <view class="list-item" wx:for="{{ routes }}" wx:key="{{ index }}" wx:for-item="route" data-index="{{ index }}" catchtap="to">
+      {{ route.name }}
+    </view>
+  </view>
+</view>

@@ -1,27 +1,28 @@
-// safe.js
-var app = getApp()
+// index.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentType: 'tj',
-    structure: null,
-    buildings: null,
-    sections: null,
+    routes: [
+      {
+        url: '../safe/index',
+        name: '安全采集'
+      },
+      {
+        url: '../buildings/buildings',
+        name: '安全信息'
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.getRisksDb((risksDb) => {
-      let structure = risksDb.structure
-      let buildings = risksDb.buildings
-      let sections = risksDb.sections
-      this.setData({ structure, buildings, sections })
-    })
+  
   },
 
   /**
@@ -86,17 +87,9 @@ Page({
   onPullDownRefresh: function () {
   
   },
-  changeCategory (event) {
-    let currentType = this.data.currentType
-    this.setData({ currentType: currentType === 'tj' ? 'az' : 'tj' })
-  },
-  tap (event) {
-    let dataset = event.currentTarget.dataset
-    console.log(dataset)
-    let buildingId = dataset.buildingid
-    let sectionId = dataset.sectionid
-    let sectionName = dataset.sectionname
-    let currentType = this.data.currentType
-    wx.navigateTo({ url: `risksOfSection?buildingId=${buildingId}&sectionId=${sectionId}&currentType=${currentType}&sectionName=${sectionName}` })
+  to (event) {
+    let index = event.currentTarget.dataset.index
+    console.log(index)
+    wx.navigateTo({ url: this.data.routes[index].url })
   }
 })

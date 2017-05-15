@@ -53,8 +53,10 @@ Page({
         let risk = risks[i]
         risk.date = new Date(risk.commit_time).format('YYYY-MM-dd')
         let preState = risk.state
-        let state = Object.assign({}, stateMap[preState], { code: preState })
-        risk.state = state
+        if (Object.prototype.toString.call(preState) === '[object String]') {
+          let state = Object.assign({}, stateMap[preState], { code: preState })
+          risk.state = state
+        }
         return risk
       })
       this.setData({ list })

@@ -2,6 +2,7 @@
 <view class="container safe">
   <view class="title safe-title">
     <text>安全问题</text>
+    <button class="change-btn" hover-class="hover" catchtap="changeCategory">{{ currentType === 'tj' ? '土建' : '安装' }}[切换]</button>
   </view>
   <scroll-view class="list safe-list" scroll-y>
     <view class="safe-list-item" wx:for="{{ structure[currentType] }}" wx:key="{{ building.id }}"  wx:for-index="buildingId">

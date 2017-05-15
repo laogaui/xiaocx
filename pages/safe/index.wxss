@@ -44,3 +44,12 @@
 .list-item.safe-sub-list-item text {
   font-size: 16px;
 }
+
+.change-btn {
+  color: #FFFFFF;
+  background-color: #337ab7;
+}
+
+.change-btn.hover {
+  background-color: #286090;
+}

@@ -1,0 +1,4 @@
+/* index.wxss */
+.index {
+  padding-top: 120rpx;
+}
