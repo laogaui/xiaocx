@@ -16,7 +16,7 @@
 </view>
 <view class="modal" hidden="{{ modalHidden }}">
   <scroll-view class="modal-body list" scroll-y>
-    <view wx:for="{{ imageComments }}" wx:key="{{ index }}" class="list-item {{ commentSelectIndex == index ? 'tap' : '' }}" hover-class="hover" catchtap="commentTap" data-index=" {{ index }}" data-info="{{ item }}">
+    <view wx:for="{{ imageComments }}" wx:key="{{ index }}" class="list-item {{ commentSelectIndex == index ? 'tap' : '' }}" hover-class="hover" catchtap="commentTap" data-info="{{ item }}" data-index=" {{ index }}">
       {{ item }}
       </view>
   </scroll-view>

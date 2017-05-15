@@ -26,14 +26,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
@@ -94,32 +94,100 @@ Page({
     })
   },
   btnClick () {
+    console.log('88888')
     let data = wx.getStorageSync('imageInfoList') || []
-
-    let next = () => {
-      if (data.length > 0) {
-        let info = data.shift()
-        this.upload(info, next)
+    if (data.length>0){
+      wx.showLoading({
+        title: '正在上传',
+      })
+      let next = () => {
+        if (data.length > 0) {
+          let info = data.shift()
+          this.upload(info, next)
+        }else{
+          let imagedata = wx.getStorageSync('imageInfoList') || []
+          for (let i in imagedata){
+            console.log('file path is ')
+            console.log(imagedata[i].tempFilePath)
+            wx.removeSavedFile({
+              filePath: imagedata[i].tempFilePath,
+              complete: function (res) {
+                if (i==imagedata.length-1){
+                  wx.removeStorageSync('imageInfoList')
+                  wx.showToast({
+                    title: '上传成功',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                }
+                console.log(res)
+              }
+            })
+          }
+          // wx.hideLoading()
+        }
       }
+      next()
+    }else{
+      wx.hideLoading()
+      wx.showModal({
+        title: '提示',
+        content: '没有采集数据',
+        showCancel: false,
+        cancelText: '',
+        cancelColor: '',
+        confirmText: '确认',
+        confirmColor: '',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
     }
-    next()
   },
   upload(info, cb) {
     let filePath = info.tempFilePath
-    info.content = JSON.stringify(info.content)
-    delete info.tempFilePath
+    let imagecontent = info['content']
+    // delete info.tempFilePath
     wx.uploadFile({
       url: 'https://dev.iscv.sunftech.org/upload/site_risk',
       filePath,
       name: 'image',
       header: {},
-      formData: info,
+      formData: { 'content': JSON.stringify(imagecontent)},
       success: function(res) {
-        console.log('success')
-        console.log(res)
         cb()
+        // let data = res.data
+        // console.log(data[''])
+        // if (data['status']=='success'){
+        //   cb()
+        // }else{
+        //   wx.hideLoading()
+        //   let detail = res.data['detail'] || '数据上传失败'
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: detail,
+        //   })
+        // }
+        console.log(res)
+        
       },
       fail: function(res) {
+        wx.hideLoading()
+        let detail = res.data['detail']||'数据上传失败'
+        wx.showModal({
+          title: '提示',
+          content: detail,
+          showCancel: true,
+          cancelText: '取消',
+          cancelColor: '',
+          confirmText: '确认',
+          confirmColor: '',
+          success: function (res) { },
+          fail: function (res) {
+
+           },
+          complete: function (res) { },
+        })
         console.log('fail')
         console.log(res)
       },

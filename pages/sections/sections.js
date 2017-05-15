@@ -31,7 +31,8 @@ Page({
    */
   onLoad: function (options) {
     let buildingId = options.buildingId
-    app.getInfo((info) => {
+    // app.getInfo((info) => {
+     let info = app.globalData.db
       let building = info['global_structure']['buildings'][buildingId]
       let sections = building.sections
       let newSections = Object.assign({}, this.data.sections)
@@ -52,7 +53,7 @@ Page({
         sections: newSections,
         [`${currentType}Class`]: 'tap'
       })
-    })
+    // })
     this.setData({
       imageComments: require('imageComments.json'),
     })
@@ -151,14 +152,16 @@ Page({
             construction_category_id: sections[categoryType][sectionId]['categoryId'],
             type: 'safety_risk',
             section_id: sectionId,
-            device: '1',
+            device: 'A85EB0D3-4605-4F27-B0A9-0BA1180AB520',
             comment: '',
             description: '',
           }
         }
         this.setData({ currentImageInfo })
       },
-      fail: function (res) { },
+      fail: function (res) {
+        console.log(res)
+       },
       complete: function (res) { },
     })
   },
@@ -184,6 +187,50 @@ Page({
     this.setData({ modalHidden: true })
   },
   modalComfirmClick () {
+    let imagedata = wx.getStorageSync('imageInfoList') || []
+    if (imagedata.length > 3) {
+      var  size= new Number(0)
+      for (let i in imagedata) {
+        console.log('i is')
+       console.log(i)
+        wx.getSavedFileInfo({
+
+          filePath: imagedata[i].tempFilePath, //仅做示例用，非真正的文件路径
+          success: function (res) {
+            console.log('hahhhhh')
+            size = size + Number(res.size)
+            if (i == imagedata.length-1){
+              if (size/1024/1024 > 9.0) {
+                wx.showModal({
+                  title: '警告',
+                  content: '照片已超最大限量，请及时上传',
+                  showCancel: false
+                })
+              }
+            }
+            console.log('mysize is')
+            console.log(size)
+          }
+        })
+      }
+    }
+    if (this.data.descriptionInfo == '' || this.data.descriptionInfo==null){
+     wx.showModal({
+       title: '',
+       content: '安全描述不能为空',
+       showCancel:false
+     })
+     return
+    }
+    if (this.data.commentInfo == null || this.data.commentInfo == ''){
+      wx.showModal({
+        title: '',
+        content: '没有选择安全类别',
+        showCancel: false
+      })
+      return
+    }
+
     let currentImageInfo = this.data.currentImageInfo
     let description = this.data.descriptionInfo
     let comment = this.data.commentInfo

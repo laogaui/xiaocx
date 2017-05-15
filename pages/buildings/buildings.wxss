@@ -1,5 +1,7 @@
 /* buildings.wxss */
 
 .buildings {
+  position: relative;
   padding-top: 120rpx;
+  overflow: auto;
 }
