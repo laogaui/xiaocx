@@ -1,0 +1,31 @@
+<!--risk.wxml-->
+<view class="container risk">
+  <view class="title risk-title">
+    <text>安全问题详情</text>
+  </view>
+  <view class="thumbnail">
+    <image src="{{ risk.url }}" mode="widthFix" catchtap="previewImage" data-url="{{ risk.url }}"></image>
+    <view class="risk-info">
+      <view>
+        <text>类别</text>
+        <text>{{ risk.comment }}</text>
+      </view>
+      <view>
+        <text>描述</text>
+        <text>{{ risk.description }}</text>
+      </view>
+      <view>
+        <text>发现时间</text>
+        <text>{{ risk.date }}</text>
+      </view>
+      <view>
+        <text>当前状态</text>
+        <text class="risk-state {{ risk.state.className }}">{{ risk.state.des }}</text>
+      </view>
+      <view wx:if="{{ risk.state.code == 'opened' }}" class="btn-group">
+        <button class="risk-btn warning-bg" catchtap="changeState">已敦促</button>
+        <button class="risk-btn success-bg" catchtap="changeState">已整改</button>
+      </view>
+    </view>
+  </view>
+</view>

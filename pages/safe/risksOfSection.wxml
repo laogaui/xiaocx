@@ -1,0 +1,40 @@
+<!--risksOfSection.wxml-->
+<view class="container risks-of-section">
+  <view class="title risk-of-section-title">
+    <text> {{ sectionName }} 安全问题列表</text>
+  </view>
+  <scroll-view class="list risks-list" scroll-y>
+    <!--<view class="row">
+      <view class="col-xs-4" wx:for="{{ list }}" wx:for-item="risk">
+        <view class="thumbnail" catchtap="tap" data-id="{{ risk.id }}">
+          <image src="{{ risk.url }}" mode="widthFix"></image>
+          <view class="caption">
+            <text class="text-center">{{ risk.date }}</text>
+            <text class="text-center">{{ risk.comment }}</text>
+            <text class="text-center">{{ risk.description }}</text>
+          </view>
+        </view>
+      </view>
+    </view>-->
+    <view class="risks-list-item" wx:for="{{ list }}" wx:for-item="risk" catchtap="tap" data-id="{{ risk.id }}">
+      <image src="{{ risk.url }}" mode="aspectFit"></image>
+      <view class="risk-info">
+        <view class="risk-info-item">
+          <text class="risk-info-item-left">类别</text>
+          <text class="risk-info-item-right">{{ risk.comment }}</text>
+        </view>
+        <view class="risk-info-item">
+          <text class="risk-info-item-left">描述</text>
+          <text class="risk-info-item-right">{{ risk.description }}</text>
+        </view>
+        <view class="risk-info-item">
+          <text class="risk-info-item-left">发现时间</text>
+          <text class="risk-info-item-right">{{ risk.date }}</text>
+        </view>
+        <view class="risk-info-item">
+          <text class="risk-state {{ risk.state.className }}">{{ risk.state.des }}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

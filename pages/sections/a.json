@@ -1,0 +1,11 @@
+{
+  "content": {
+    "commit_time": user.time, //拍照时间
+    "construction_category_id": // int  category id,
+    "type": //固定,
+    "section_id": //int,
+    "device": self.udid// 手机设备id,
+    "comment": user.comment// 字符串,
+    "description": user.image_description
+  }
+}

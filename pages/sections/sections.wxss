@@ -1,0 +1,16 @@
+/* sections.wxss */
+.sections {
+  padding-top: 240rpx;
+}
+
+.sections .title .btn-group {
+  margin-bottom: 40rpx;
+}
+
+.sections .title text {
+  line-height: 40rpx;
+}
+
+.sections .title .btn-group button.tap {
+  background-color: #DDDDDD;
+}

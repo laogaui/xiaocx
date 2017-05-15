@@ -1,0 +1,31 @@
+<!--sections.wxml-->
+<view class="container sections">
+  <view class="title">
+    <view class="btn-group">
+      <button class="{{ tjClass }}" catchtap="toggle" data-type="tj">土建</button>
+      <button class="{{ azClass }}" catchtap="toggle" data-type="az">安装</button>
+    </view>
+    <text>{{ buildingName }} {{ currentType == 'tj' ? '土建' : '安装'}}</text>
+  </view>
+  <scroll-view class="list" scroll-y>
+    <view class="list-item" wx:for="{{ sections[currentType] }}" wx:key="{{ item.id }}" bindtap="tap"  data-id="{{ item.id }}">
+      <text class="list-item-text">{{ item.name }}</text>
+      <button class="list-item-btn" catchtap="chooseImage" data-id="{{ item.id }}">拍照</button>
+    </view>
+  </scroll-view>
+</view>
+<view class="modal" hidden="{{ modalHidden }}">
+  <scroll-view class="modal-body list" scroll-y>
+    <view wx:for="{{ imageComments }}" wx:key="{{ index }}" class="list-item {{ commentSelectIndex == index ? 'tap' : '' }}" hover-class="hover" catchtap="commentTap" data-index=" {{ index }}" data-info="{{ item }}">
+      {{ item }}
+      </view>
+  </scroll-view>
+  <view class="modal-footer">
+    <text class="modal-footer-text">请在下方输入安全描述(注:安全描述不能为空)</text>
+    <input class="modal-footer-input" type="text" bindinput="input" value="{{ descriptionInfo }}"/>
+    <view class="btn-group modal-footer-btn-group">
+      <button catchtap="modalComfirmClick">取消</button>
+      <button catchtap="modalComfirmClick">保存</button>
+    </view>
+  </view>
+</view>

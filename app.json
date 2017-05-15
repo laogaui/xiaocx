@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/safe/index",
+    "pages/buildings/buildings",
+    "pages/safe/risksOfSection",
+    "pages/sections/sections",
+    "pages/image/image",
+    "pages/safe/risk"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "安全",
+    "navigationBarTextStyle": "#fff"
+  }
+}

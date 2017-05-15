@@ -1,0 +1,54 @@
+/* risk.wxss */
+.risk {
+  padding-top: 120rpx;
+}
+
+.risk image {
+  width: 100%;
+}
+
+.risk-info view text {
+  display: block;
+  float: left;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.risk-info view {
+  overflow: hidden;
+}
+
+.risk-info view::after {
+  clear: both;
+  content: ' ';
+  display: table;
+}
+
+.risk-info view text:first-of-type {
+  color: #666666;
+  min-width: 200rpx;
+}
+
+.risk-info view text.risk-state {
+  color: #FFFFFF;
+  font-weight: bold;
+  height: 40rpx;
+  margin-top: 15rpx;
+  line-height: 40rpx;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 12px;
+}
+
+.risk .btn-group {
+  margin: 30rpx 0;
+}
+
+.risk .btn-group .risk-btn {
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  width: 45%;
+  height: 70rpx;
+  line-height: 70rpx;
+}

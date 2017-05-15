@@ -1,0 +1,54 @@
+/* risksOfSection.wxss */
+.risks-of-section {
+  padding-top: 120rpx;
+}
+
+.risks-list {
+  padding-top: 40rpx;
+}
+
+.risks-list-item {
+  width: auto;
+  margin: 0 30rpx 40rpx;
+  padding: 20rpx;
+  background-color: #EEEEEE;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.risks-list-item::after {
+  clear: both;
+  content: ' ';
+  display: table;
+}
+
+.risks-list-item image {
+  float: left;
+  width: 25%;
+  margin-right: 5%;
+  height: 220rpx;
+  background-color: #FFFFFF;
+}
+
+.risks-list-item .risk-info {
+  float: left;
+  width: 70%;
+}
+
+.risks-list-item .risk-info .risk-info-item text {
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.risks-list-item .risk-info .risk-info-item .risk-info-item-left {
+  width: 30%;
+  min-width: 0;
+}
+
+.risks-list-item .risk-info .risk-info-item .risk-info-item-right {
+  width: 70%;
+}
+
+.risks-list-item .risk-info .risk-info-item text.risk-state {
+  min-width: 0;
+}

@@ -1,0 +1,13 @@
+<!--buildings.wxml-->
+<view class="container buildings">
+  <view class="title buildings-title">
+    <text>单体建筑</text>
+    <button catchtap="btnClick">上传数据</button>
+    <!--<button catchtap="chooseImage">拍照</button>-->
+  </view>
+  <scroll-view class="list" scroll-y>
+    <view class="list-item {{ selectId == item.id ? 'tap' : '' }}" hover-class="hover" wx:for="{{ buildings }}" wx:key="{{ item.id }}" bindtap="tap"  data-id="{{ item.id }}">
+      <text class="list-item-text" bindtap="">{{ item.name }}</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,18 @@
+<!--safe.wxml-->
+<view class="container safe">
+  <view class="title safe-title">
+    <text>安全问题</text>
+  </view>
+  <scroll-view class="list safe-list" scroll-y>
+    <view class="safe-list-item" wx:for="{{ structure[currentType] }}" wx:key="{{ building.id }}"  wx:for-index="buildingId">
+      <view class="safe-list-item-title">
+        <text>{{ buildings[buildingId].name }}</text>
+      </view>
+      <view class="safe-sub-list">
+        <view class="list-item safe-sub-list-item" hover-class="hover" wx:for="{{ item }}" wx:for-index="sectionId" data-buildingid="{{ buildingId }}" data-sectionid="{{ sectionId }}" data-sectionname="{{ sections[sectionId].name }}" catchtap="tap">
+          <text>{{ sections[sectionId].name }}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

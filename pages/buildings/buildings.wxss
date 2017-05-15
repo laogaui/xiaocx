@@ -1,0 +1,5 @@
+/* buildings.wxss */
+
+.buildings {
+  padding-top: 120rpx;
+}

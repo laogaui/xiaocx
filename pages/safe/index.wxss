@@ -1,0 +1,46 @@
+/* safe.wxss */
+.safe {
+  padding-top: 120rpx;
+}
+
+.safe-list-item {
+  border-radius: 12rpx;
+  border: 1px solid #e3e3e3;
+  background-color: #f5f5f5;
+  margin: 0 30rpx 30rpx;
+  padding: 40rpx 30rpx;
+  width: auto;
+}
+
+.safe-list-item:first-of-type {
+  margin-top: 30rpx;
+}
+
+.safe-list-item .safe-list-item-title {
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.safe-list-item .safe-list-item-title text {
+  font-size: 18px;
+}
+
+.safe-sub-list {
+  border: 1px solid #e3e3e3;
+  background-color: #FFFFFF;
+  border-radius: 6rpx;
+}
+
+.list-item.safe-sub-list-item {
+  padding: 20rpx 40rpx;
+}
+
+.list-item.safe-sub-list-item:last-of-type {
+  border-bottom: none;
+}
+
+.list-item.safe-sub-list-item text {
+  font-size: 16px;
+}
